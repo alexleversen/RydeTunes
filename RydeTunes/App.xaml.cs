@@ -1,4 +1,3 @@
-using System;
 using System.Timers;
 using RydeTunes.Network;
 using Xamarin.Forms;
@@ -52,22 +51,14 @@ namespace RydeTunes
 
         private void PingSpotify(Timer timer)
         {
-            if(PlaylistIsEmpty() && _rideStarted){
+            if(SpotifyApi.Instance.PlaylistIsEmpty() && _rideStarted){
                 timer.Stop();
-                DisconnectFromPlaylist();
+                SpotifyApi.Instance.DisconnectFromPlaylist();
                 return;
             }
             else if (!_rideStarted) {
                 _rideStarted = true;
             }
-        }
-
-        private bool PlaylistIsEmpty() {
-            return true; //TODO: Implement
-        }
-
-        private void DisconnectFromPlaylist(){
-            //TODO: Implement
         }
     }
 }
