@@ -5,7 +5,7 @@
              ios:Page.UseSafeArea="true" 
              x:Class="RydeTunes.MainPage">
     <StackLayout>
-        <Label Text="Who are you?" FontSize="30" VerticalOptions="Start" HorizontalOptions="Center" Margin="20, 50, 20, 20"/>
+        <Label Text="Who are you?" FontSize="30" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontAttributes="Bold" Margin="20, 0, 20, 20"/>
         <Label Text="Rider" FontSize="30" VerticalOptions="Start" HorizontalOptions="Center" Margin="20">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>

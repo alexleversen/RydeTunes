@@ -10,6 +10,8 @@ namespace RydeTunes.Network
 
         public event EventHandler SessionInvalidated;
 
+        public string AuthToken { get; set; }
+
         public bool CheckSpotifySession()
         {
             return true; //false if playlist is empty AND a song has been added to it this session
