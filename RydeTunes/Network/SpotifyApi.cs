@@ -39,13 +39,12 @@ namespace RydeTunes.Network
 
         public string GetRydeTunesPlaylist()
         {
-            // TODO
             // Get playlist if it exists
             Playlist p = SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
             // Clear playlist
-
+            ClearPlaylist(p.id);
             // Return id
-            return "";
+            return p.id;
         }
         // Searches for playlists of the current user with the given name
         // Returns null if playlist was not found
@@ -61,11 +60,16 @@ namespace RydeTunes.Network
 
         }
         public async List<Playlist> GetPlayists() {
-          HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
-          return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync());
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
         }
-        public async Playlist GetPlaylist(string playlistId) {
-
+        public async Playlist GetPlaylist(string userId, string playlistId) {
+            HttpResponseMessage response = await spotifyClient.getAsync("v1/users/"+ userId + "/playlists/" + playlistId);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
+        }
+        public async List<Track> GetPlaylistTracks(string userId, string playlistId) {
+              HttpResponseMessage response = await spotifyClient.getAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
+              return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
         }
 
         public bool PlaylistIsEmpty(string playlistId)
@@ -76,6 +80,9 @@ namespace RydeTunes.Network
         public void ClearPlaylist(string playlistId)
         {
             //TODO: Implement
+        }
+        public void ClearPlaylistTrack(string trackId, string playlistId) {
+            //TODO implement
         }
 
         /* Passenger methods */
