@@ -51,9 +51,9 @@ namespace RydeTunes
 
         private void PingSpotify(Timer timer)
         {
-            if(SpotifyApi.Instance.PlaylistIsEmpty() && _rideStarted){
+            if(SpotifyApi.Instance.PlaylistIsEmpty("") && _rideStarted){
                 timer.Stop();
-                SpotifyApi.Instance.DisconnectFromPlaylist();
+                //SpotifyApi.Instance.DisconnectFromPlaylist();
                 return;
             }
             else if (!_rideStarted) {

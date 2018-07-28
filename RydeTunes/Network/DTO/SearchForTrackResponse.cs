@@ -4,10 +4,6 @@ using System.Text;
 
 namespace RydeTunes.Network.DTO
 {
-    public class ExternalUrls
-    {
-        public string spotify { get; set; }
-    }
 
     public class Artist
     {
@@ -17,13 +13,6 @@ namespace RydeTunes.Network.DTO
         public string name { get; set; }
         public string type { get; set; }
         public string uri { get; set; }
-    }
-
-    public class Image
-    {
-        public int height { get; set; }
-        public string url { get; set; }
-        public int width { get; set; }
     }
 
     public class Album

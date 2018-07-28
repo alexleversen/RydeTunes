@@ -2,7 +2,7 @@ using System;
 
 namespace RydeTunes.Network.DTO
 {
-  class ExternalUrls {
+  public class ExternalUrls {
     public string spotify { get; set; }
   }
 }
