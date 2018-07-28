@@ -16,7 +16,7 @@ namespace RydeTunes
             {
                 var tokenStartIndex = url.IndexOf('=');
                 var tokenEndIndex = url.IndexOf('&');
-                SpotifyApi.Instance.AuthToken = url.Substring(tokenStartIndex + 1, tokenEndIndex - tokenStartIndex - 1);
+                SpotifyApi.Instance.UpdateToken(url.Substring(tokenStartIndex + 1, tokenEndIndex - tokenStartIndex - 1));
 
                 ReadyToNavigateToSuccess?.Invoke(this, EventArgs.Empty);
             }
