@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("RydeTunesClient.Droid.Resource", IsApplication = true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("RydeTunesHost.Droid.Resource", IsApplication = true)]
 
-namespace RydeTunesClient.Droid
+namespace RydeTunesHost.Droid
 {
 
 
@@ -26,7 +26,7 @@ namespace RydeTunesClient.Droid
 
         public static void UpdateIdValues()
         {
-            global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::RydeTunesClient.Droid.Resource.Attribute.actionBarSize;
+            global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::RydeTunesHost.Droid.Resource.Attribute.actionBarSize;
         }
 
         public partial class Animation

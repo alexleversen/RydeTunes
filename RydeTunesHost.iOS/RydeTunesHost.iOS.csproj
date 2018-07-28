@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F65DD251-A73B-4893-940F-25B677AD3657}</ProjectGuid>
+    <ProjectGuid>{F9AADE95-396D-443F-89C2-FBF474EED05E}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>RydeTunesClient.iOS</RootNamespace>
+    <RootNamespace>RydeTunesHost.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>RydeTunesClient.iOS</AssemblyName>
+    <AssemblyName>RydeTunesHost.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -149,6 +149,6 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
   </ItemGroup>
-  <Import Project="..\RydeTunesClient\RydeTunesClient.projitems" Label="Shared" Condition="Exists('..\RydeTunesClient\RydeTunesClient.projitems')" />
+  <Import Project="..\RydeTunesHost\RydeTunesHost.projitems" Label="Shared" Condition="Exists('..\RydeTunesHost\RydeTunesHost.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace RydeTunesClient.iOS
+namespace RydeTunesHost.iOS
 {
     public class Application
     {

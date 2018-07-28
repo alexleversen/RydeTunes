@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB7E6554-1EA0-4334-AAAD-839204E73A6C}</ProjectGuid>
+    <ProjectGuid>{B2742EB5-2C30-4C26-B109-7835920E79C0}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>RydeTunesClient.Droid</RootNamespace>
-    <AssemblyName>RydeTunesClient.Android</AssemblyName>
+    <RootNamespace>RydeTunesHost.Droid</RootNamespace>
+    <AssemblyName>RydeTunesHost.Android</AssemblyName>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -90,6 +90,6 @@
     <Folder Include="Resources\drawable-xxhdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
-  <Import Project="..\RydeTunesClient\RydeTunesClient.projitems" Label="Shared" Condition="Exists('..\RydeTunesClient\RydeTunesClient.projitems')" />
+  <Import Project="..\RydeTunesHost\RydeTunesHost.projitems" Label="Shared" Condition="Exists('..\RydeTunesHost\RydeTunesHost.projitems')" />
  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
