@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:local="clr-namespace:RydeTunes" 
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true" 
              x:Class="RydeTunes.MainPage">
     <StackLayout>
-        <Label Text="Who are you?" VerticalOptions="Start" HorizontalOptions="Center"/>
-        <Label Text="Rider" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+        <Label Text="Who are you?" FontSize="30" VerticalOptions="Start" HorizontalOptions="Center" Margin="20, 50, 20, 20"/>
+        <Label Text="Rider" FontSize="30" VerticalOptions="Start" HorizontalOptions="Center" Margin="20">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
             </Label.GestureRecognizers>
         </Label>
-        <Label Text="Driver" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+        <Label Text="Driver" FontSize="30" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Margin="20">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
             </Label.GestureRecognizers>

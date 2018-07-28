@@ -1,3 +1,4 @@
+using RydeTunes.Network;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,6 +10,8 @@ namespace RydeTunes
         public App()
         {
             InitializeComponent();
+
+            SpotifyApi.Instance = new SpotifyApi();
 
             MainPage = new NavigationPage(new MainPage {BindingContext = new MainViewModel()});
         }
@@ -26,6 +29,14 @@ namespace RydeTunes
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void PingSpotifyLoop()
+        {
+
+
+            //TODO: Loop every minute(?) and ping the playlist to check if it's empty
+            //When playlist is empty and we care (a song has been added this session), raise SessionInvalidated (SessionInvalidated?.Invoke(this, EventArgs.Empty);
         }
     }
 }

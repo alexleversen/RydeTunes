@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-
-namespace RydeTunes
+﻿namespace RydeTunes
 {
     public class MainViewModel
     {
-        
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RydeTunes
 {
-    class RTServerApi
+    class RTHostApi
     {
     }
 }

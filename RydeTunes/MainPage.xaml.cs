@@ -1,5 +1,4 @@
 ﻿using System;
-using Android.Util;
 using Xamarin.Forms;
 
 namespace RydeTunes
@@ -9,18 +8,16 @@ namespace RydeTunes
         public MainPage()
         {
             InitializeComponent();
+            Title = "RydeTunes";
         }
 
         private void RiderOption_OnTapped(object sender, EventArgs e)
         {
-            Log.Debug("d", "Calling ViewModel Constructor");
-            var viewModel = new RiderPageViewModel();
-            Log.Debug("d", "ViewModel Constructor called");
             var page = new RiderPage
             {
-                BindingContext = viewModel
+                BindingContext = new RiderPageViewModel()
             };
-            Application.Current.MainPage.Navigation.PushAsync(page);
+            NavigateAndSetAsRoot(page);
         }
 
         private void DriverOption_OnTapped(object sender, EventArgs e)
@@ -29,7 +26,13 @@ namespace RydeTunes
             {
                 BindingContext = new DriverLoginViewModel()
             };
+            NavigateAndSetAsRoot(page);
+        }
+
+        private void NavigateAndSetAsRoot(Page page)
+        {
             Application.Current.MainPage.Navigation.PushAsync(page);
+            Application.Current.MainPage.Navigation.RemovePage(this);
         }
     }
 }
