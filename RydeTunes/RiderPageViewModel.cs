@@ -1,10 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace RydeTunes
 {
-    class RiderPageViewModel
+    public class RiderPageViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<string> SongList { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<string> SongList { get; private set; }
 
         public RiderPageViewModel()
         {
