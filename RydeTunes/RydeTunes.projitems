@@ -16,6 +16,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DriverDashboard.xaml.cs">
+      <DependentUpon>DriverDashboard.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)DriverDashboardViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DriverLoginPage.xaml.cs">
       <DependentUpon>DriverLoginPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -47,5 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)DriverDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
