@@ -4,17 +4,31 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true" 
              x:Class="RydeTunes.MainPage">
-    <StackLayout>
-        <Label Text="Who are you?" FontSize="30" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontAttributes="Bold" Margin="20, 0, 20, 20"/>
-        <Label Text="Rider" FontSize="30" VerticalOptions="Start" HorizontalOptions="Center" Margin="20">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
-            </Label.GestureRecognizers>
-        </Label>
-        <Label Text="Driver" FontSize="30" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Margin="20">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
-            </Label.GestureRecognizers>
-        </Label>
+    <ContentPage.Resources>
+        <Style x:Key="ButtonLabelStyle" TargetType="Label">
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="30"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="0">
+        <Label Text="Who are you?" FontSize="30" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
+            <Label Text="Rider" Style="{StaticResource ButtonLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </ContentView>
+        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource FacebookBlue}">
+            <Label Text="Driver" Style="{StaticResource ButtonLabelStyle}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </ContentView>
     </StackLayout>
 </ContentPage>
