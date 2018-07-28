@@ -16,14 +16,14 @@
 
     <StackLayout Spacing="0">
         <Label Text="Who are you?" FontSize="30" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontAttributes="Bold"/>
-        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="#1DB954">
+        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
             <Label Text="Rider" Style="{StaticResource ButtonLabelStyle}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
                 </Label.GestureRecognizers>
             </Label>
         </ContentView>
-        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="#3B5998">
+        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource FacebookBlue}">
             <Label Text="Driver" Style="{StaticResource ButtonLabelStyle}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
