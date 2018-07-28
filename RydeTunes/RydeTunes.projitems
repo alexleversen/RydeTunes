@@ -37,6 +37,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RiderPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IQRCodeScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)RiderPage.xaml">
