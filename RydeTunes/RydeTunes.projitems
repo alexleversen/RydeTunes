@@ -20,5 +20,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Network\SpotifyApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainViewModel.cs" />
   </ItemGroup>
 </Project>
