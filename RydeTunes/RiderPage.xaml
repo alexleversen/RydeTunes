@@ -1,13 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RydeTunes.RiderPage">
     <ContentPage.Content>
         <StackLayout>
             <SearchBar VerticalOptions="Start"/>
-            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}">
-
-            </ListView>
+            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}"/>
+            <Button x:Name="qrCodeButton" VerticalOptions="End" Text="Scan QR Code..." Clicked="ScanQRCode"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

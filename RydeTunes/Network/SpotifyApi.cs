@@ -38,6 +38,7 @@ namespace RydeTunes.Network
         /* Driver methods */
 
         public string GetRydeTunesPlaylist()
+
         {
             // Get playlist if it exists
             

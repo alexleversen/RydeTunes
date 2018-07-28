@@ -28,6 +28,9 @@ namespace RydeTunes.Droid
 		{
 			global::ModernHttpClient.Resource.String.library_name = global::RydeTunes.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::RydeTunes.Droid.Resource.Attribute.actionBarSize;
+			global::ZXing.Mobile.Resource.Id.contentFrame = global::RydeTunes.Droid.Resource.Id.contentFrame;
+			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::RydeTunes.Droid.Resource.Layout.zxingscanneractivitylayout;
+			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::RydeTunes.Droid.Resource.Layout.zxingscannerfragmentlayout;
 		}
 		
 		public partial class Animation
@@ -3169,6 +3172,9 @@ namespace RydeTunes.Droid
 			// aapt resource value: 0x7f09008d
 			public const int container = 2131296397;
 			
+			// aapt resource value: 0x7f0900c9
+			public const int contentFrame = 2131296457;
+			
 			// aapt resource value: 0x7f090066
 			public const int contentPanel = 2131296358;
 			
@@ -3292,8 +3298,8 @@ namespace RydeTunes.Droid
 			// aapt resource value: 0x7f090061
 			public const int list_item = 2131296353;
 			
-			// aapt resource value: 0x7f0900ca
-			public const int masked = 2131296458;
+			// aapt resource value: 0x7f0900cb
+			public const int masked = 2131296459;
 			
 			// aapt resource value: 0x7f0900b9
 			public const int media_actions = 2131296441;
@@ -3628,8 +3634,8 @@ namespace RydeTunes.Droid
 			// aapt resource value: 0x7f090016
 			public const int view_offset_helper = 2131296278;
 			
-			// aapt resource value: 0x7f0900c9
-			public const int visible = 2131296457;
+			// aapt resource value: 0x7f0900ca
+			public const int visible = 2131296458;
 			
 			// aapt resource value: 0x7f0900ab
 			public const int volume_item_container = 2131296427;
@@ -3927,6 +3933,12 @@ namespace RydeTunes.Droid
 			
 			// aapt resource value: 0x7f040043
 			public const int tooltip = 2130968643;
+			
+			// aapt resource value: 0x7f040044
+			public const int zxingscanneractivitylayout = 2130968644;
+			
+			// aapt resource value: 0x7f040045
+			public const int zxingscannerfragmentlayout = 2130968645;
 			
 			static Layout()
 			{
