@@ -11,13 +11,13 @@ namespace RydeTunes.Network
         public static SpotifyApi Instance;
 
         private static string SPOTIFY_API_URL = "https://api.spotify.com";
+        private static string RYDETUNES_PLAYLIST_NAME = "Ryde Tunes Collaborative Playlist"
 
         private HttpClient spotifyClient;
 
 
-        private SpotifyApi(string authToken)
+        public SpotifyApi()
         {
-            UpdateToken(authToken);
             Instance = this;
         }
         public void UpdateToken(string authToken)
@@ -38,23 +38,33 @@ namespace RydeTunes.Network
         /* Driver methods */
 
         public string GetRydeTunesPlaylist()
-
         {
+            // TODO
             // Get playlist if it exists
-            
+            Playlist p = SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
             // Clear playlist
+
             // Return id
             return "";
         }
         // Searches for playlists of the current user with the given name
-        public async string SearchForPlaylist(string playlistName)
+        // Returns null if playlist was not found
+        public async Playlist SearchForPlaylist(string playlistName)
         {
-            HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
-            var values = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
-            foreach (Dictionary<string, string> i in values["items"])
+            foreach (Playlist p in GetPlaylists().items)
             {
-
+                if (p.name.Contains(playlistName)) {
+                  return p;
+                }
             }
+            return null;
+
+        }
+        public async List<Playlist> GetPlayists() {
+          HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
+          return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync());
+        }
+        public async Playlist GetPlaylist(string playlistId) {
 
         }
 
@@ -75,7 +85,7 @@ namespace RydeTunes.Network
             // TODO
             return new List<string>();
         }
-        
+
 
     }
 }
