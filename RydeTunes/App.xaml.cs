@@ -1,4 +1,3 @@
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +10,7 @@ namespace RydeTunes
         {
             InitializeComponent();
 
-            MainPage = new MainPage(){BindingContext = new MainViewModel()};
+            MainPage = new NavigationPage(new MainPage {BindingContext = new MainViewModel()});
         }
 
         protected override void OnStart()

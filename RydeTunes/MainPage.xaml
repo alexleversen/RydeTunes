@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:RydeTunes" xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-ios:Page.UseSafeArea="true" x:Class="RydeTunes.MainPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:RydeTunes" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true" 
+             x:Class="RydeTunes.MainPage">
     <StackLayout>
-        <SearchBar VerticalOptions="Start"/>
-        <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}">
-            
-        </ListView>
+        <Label Text="Who are you?" VerticalOptions="Start" HorizontalOptions="Center"/>
+        <Label Text="Rider" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <Label Text="Driver" VerticalOptions="StartAndExpand" HorizontalOptions="Center">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
+            </Label.GestureRecognizers>
+        </Label>
     </StackLayout>
 </ContentPage>
