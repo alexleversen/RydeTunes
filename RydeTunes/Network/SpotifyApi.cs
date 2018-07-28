@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
+using RydeTunes.Network.DTO;
 
 namespace RydeTunes.Network
 {
@@ -11,7 +13,7 @@ namespace RydeTunes.Network
         public static SpotifyApi Instance;
 
         private static string SPOTIFY_API_URL = "https://api.spotify.com";
-        private static string RYDETUNES_PLAYLIST_NAME = "Ryde Tunes Collaborative Playlist"
+        private static string RYDETUNES_PLAYLIST_NAME = "Ryde Tunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
 
@@ -37,11 +39,11 @@ namespace RydeTunes.Network
 
         /* Driver methods */
 
-        public string GetRydeTunesPlaylist()
+        public async Task<string> GetRydeTunesPlaylist()
         {
             // TODO
             // Get playlist if it exists
-            Playlist p = SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
+            Playlist p = await SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
             // Clear playlist
 
             // Return id
@@ -49,9 +51,9 @@ namespace RydeTunes.Network
         }
         // Searches for playlists of the current user with the given name
         // Returns null if playlist was not found
-        public async Playlist SearchForPlaylist(string playlistName)
+        public async Task<Playlist> SearchForPlaylist(string playlistName)
         {
-            foreach (Playlist p in GetPlaylists().items)
+            foreach (Playlist p in await GetPlaylists())
             {
                 if (p.name.Contains(playlistName)) {
                   return p;
@@ -60,12 +62,12 @@ namespace RydeTunes.Network
             return null;
 
         }
-        public async List<Playlist> GetPlayists() {
+        public async Task<List<Playlist>> GetPlaylists() {
           HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
-          return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync());
+          return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
         }
-        public async Playlist GetPlaylist(string playlistId) {
-
+        public async Task<Playlist> GetPlaylist(string playlistId) {
+            return null;
         }
 
         public bool PlaylistIsEmpty(string playlistId)
