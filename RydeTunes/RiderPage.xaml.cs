@@ -21,13 +21,8 @@ namespace RydeTunes
 		}
 
         async void ScanQRCode(object sender, System.EventArgs e) {
-            var scanner = new MobileBarcodeScanner()
-            {
-                TopText = "Test1",
-                BottomText = "Test2"
-            };
-            var scanResult = await scanner.Scan(new MobileBarcodeScanningOptions());
-            _qrCodeText = scanResult.Text;
+            var scanner = DependencyService.Get<IQRCodeScanner>();
+            _qrCodeText = await scanner.ScanAsync();
             qrCodeButton.Text = _qrCodeText;
         }
 	}
