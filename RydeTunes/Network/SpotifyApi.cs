@@ -67,17 +67,17 @@ namespace RydeTunes.Network
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
         }
         public async Task<Playlist> GetPlaylist(string userId, string playlistId) {
-            HttpResponseMessage response = await spotifyClient.getAsync("v1/users/"+ userId + "/playlists/" + playlistId);
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
         }
         public async Task<List<Track>> GetPlaylistTracks(string userId, string playlistId) {
-              HttpResponseMessage response = await spotifyClient.getAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
+              HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
               return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
         }
 
-        public bool PlaylistIsEmpty(string playlistId)
+        public bool PlaylistIsEmpty(string userId, string playlistId)
         {
-            return true; //TODO: Implement
+            return (await GetPlaylistTracks(userId, playlistId)).Count > 0;
         }
 
         public void ClearPlaylist(string playlistId)
@@ -86,6 +86,7 @@ namespace RydeTunes.Network
         }
         public void ClearPlaylistTrack(string trackId, string playlistId) {
             //TODO implement
+
         }
 
         /* Passenger methods */
