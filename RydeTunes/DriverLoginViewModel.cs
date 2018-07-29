@@ -8,7 +8,7 @@ namespace RydeTunes
         public event EventHandler ReadyToNavigateToSuccess;
 
         public string LoginUrl =>
-            @"https://accounts.spotify.com/authorize?client_id=37f783152b7d4be696ab2b901b73f99c&redirect_uri=http:%2F%2FRydeTunes.com%2FSuccess&scope=playlist-modify-public%20playlist-read-collaborative%20user-library-read%20playlist-read-private&response_type=token";
+            @"https://accounts.spotify.com/authorize?client_id=37f783152b7d4be696ab2b901b73f99c&redirect_uri=http://RydeTunes.com/Success&scope=playlist-modify-public playlist-read-collaborative user-library-read playlist-read-private&response_type=token";
 
         public void HandleUrlNavigation(string url)
         {
