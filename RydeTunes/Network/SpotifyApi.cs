@@ -41,13 +41,12 @@ namespace RydeTunes.Network
 
         public async Task<string> GetRydeTunesPlaylist()
         {
-            // TODO
             // Get playlist if it exists
             Playlist p = await SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
             // Clear playlist
-
+            ClearPlaylist(p.id);
             // Return id
-            return "";
+            return p.id;
         }
         // Searches for playlists of the current user with the given name
         // Returns null if playlist was not found
@@ -62,22 +61,32 @@ namespace RydeTunes.Network
             return null;
 
         }
-        public async Task<List<Playlist>> GetPlaylists() {
-          HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
-          return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
+
+        public async Task<List<Playlist>> GetPlayists() {
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
         }
-        public async Task<Playlist> GetPlaylist(string playlistId) {
-            return null;
+        public async Task<Playlist> GetPlaylist(string userId, string playlistId) {
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
+        }
+        public async Task<List<Track>> GetPlaylistTracks(string userId, string playlistId) {
+              HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
+              return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
         }
 
-        public bool PlaylistIsEmpty(string playlistId)
+        public bool PlaylistIsEmpty(string userId, string playlistId)
         {
-            return true; //TODO: Implement
+            return (await GetPlaylistTracks(userId, playlistId)).Count > 0;
         }
 
         public void ClearPlaylist(string playlistId)
         {
             //TODO: Implement
+        }
+        public void ClearPlaylistTrack(string trackId, string playlistId) {
+            //TODO implement
+
         }
 
         /* Passenger methods */
