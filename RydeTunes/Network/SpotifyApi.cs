@@ -41,6 +41,23 @@ namespace RydeTunes.Network
             userId = (await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK)).id;
            
         }
+        public async Task<bool> isTokenValid()
+        {
+            if (string.IsNullOrEmpty(userId))
+            {
+                return false;
+            }
+            try
+            {
+                HttpResponseMessage response = await spotifyClient.GetAsync("v1/me");
+                await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK);
+                return true;
+            } catch (Exception e)
+            {
+                // It was not an ok
+                return false;
+            }
+        }
         
 
         /* Driver methods */
@@ -173,13 +190,13 @@ namespace RydeTunes.Network
         
 
 
-        public async Task AddSongToPlaylist(string songId, string playlistId)
+        public async Task AddSongToPlaylist(string songId, string ownerUserId, string playlistId)
         {
             var arguments = "?uris=spotify:track:" + songId;
             var request = new HttpRequestMessage()
             {
                 Method = HttpMethod.Post,
-                RequestUri = new Uri("v1/users/" + userId + "/playlists/" + playlistId + "/tracks" + arguments),
+                RequestUri = new Uri("v1/users/" + ownerUserId + "/playlists/" + playlistId + "/tracks" + arguments),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
         }
