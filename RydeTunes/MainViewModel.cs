@@ -24,7 +24,7 @@ namespace RydeTunes
             }
             SpotifyApi.Instance.ActivePlaylistId = ids[0];
             SpotifyApi.Instance.UserId = ids[1];
-            SpotifyApi.Instance.Token = ids[2];
+            await SpotifyApi.Instance.UpdateToken(ids[2]);
             ReadyToNavigate?.Invoke(this,EventArgs.Empty);
         }
     }

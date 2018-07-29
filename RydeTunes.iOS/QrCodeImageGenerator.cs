@@ -11,7 +11,11 @@ namespace RydeTunes.iOS
         public ImageSource GetImageSource(string text)
         {
             var writer = new BarcodeWriter{
-                Format = ZXing.BarcodeFormat.QR_CODE
+                Format = ZXing.BarcodeFormat.QR_CODE,
+                Options = new ZXing.Common.EncodingOptions{
+                    Height = 1000,
+                    Width = 1000
+                }
             };
             var image = writer.Write(text);
             return ImageSource.FromStream(() => image.AsPNG().AsStream());

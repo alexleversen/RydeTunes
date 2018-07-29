@@ -17,7 +17,9 @@ namespace RydeTunes
 	    protected override void OnAppearing()
 	    {
 	        base.OnAppearing();
-
+            if(_viewModel != null) {
+                _viewModel.ReadyToNavigateToSuccess -= ViewModel_ReadyToNavigateToSuccess;
+            }
             _viewModel = (LoginViewModel)BindingContext;
             _viewModel.ReadyToNavigateToSuccess += ViewModel_ReadyToNavigateToSuccess;
 	    }
@@ -44,13 +46,13 @@ namespace RydeTunes
 	        _viewModel.HandleUrlNavigation(e.Url);
 	    }
 
-	    private void ViewModel_ReadyToNavigateToSuccess(object sender, EventArgs e)
+	    private async void ViewModel_ReadyToNavigateToSuccess(object sender, EventArgs e)
 	    {
 	        var page = new MainPage
 	        {
 	            BindingContext = new MainViewModel()
 	        };
-	        Application.Current.MainPage.Navigation.PushAsync(page);
+            await Application.Current.MainPage.Navigation.PushAsync(page);
             Application.Current.MainPage.Navigation.RemovePage(this);
 	    }
     }

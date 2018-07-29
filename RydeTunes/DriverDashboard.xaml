@@ -9,7 +9,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="0">
-            <Label Text="##INSTRUCTIONS##" FontSize="20" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" IsVisible="{Binding InstructionsVisible}"/>
+            <Label Text="Tap 'Start Ride' to display a QR to your riders. Once they have connected, open your Spotify app and play the playlist titled " FontSize="20" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" IsVisible="{Binding InstructionsVisible}"/>
             <Image Source="{Binding QrCodeImage}" IsVisible="{Binding QrCodeVisible}" VerticalOptions="FillAndExpand"/>
             <ContentView VerticalOptions="FillAndExpand" IsVisible="{Binding IsRideStarted, Converter={StaticResource InverseBooleanConverter}}" BackgroundColor="{StaticResource SpotifyGreen}">
                 <ContentView.GestureRecognizers>

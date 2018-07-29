@@ -24,7 +24,6 @@ namespace RydeTunes.Network
         public string Token
         { 
             get => spotifyClient.DefaultRequestHeaders.Authorization.Parameter;
-            set => UpdateToken(value).Wait();
         }
 
         public SpotifyApi()
