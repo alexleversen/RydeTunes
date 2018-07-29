@@ -9,7 +9,6 @@ namespace RydeTunes.Droid
 {
     public class QRCodeScanner : IQRCodeScanner
     {
-
         public async Task<string> ScanAsync()
         {
             var scanner = new MobileBarcodeScanner();

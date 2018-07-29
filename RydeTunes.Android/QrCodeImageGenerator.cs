@@ -16,12 +16,16 @@ namespace RydeTunes.Droid
                 Format = ZXing.BarcodeFormat.QR_CODE
             };
             var image = writer.Write(text);
-            using(var stream = new MemoryStream())
-            {
-                image.Compress(Bitmap.CompressFormat.Png, 0, stream);
-                return ImageSource.FromStream(() => stream);
-            }
 
+            var imgsrc = ImageSource.FromStream(() =>
+            {
+                MemoryStream ms = new MemoryStream();
+                image.Compress(Bitmap.CompressFormat.Jpeg, 100, ms);
+                ms.Seek(0L, SeekOrigin.Begin);
+                return ms;
+            });
+
+            return imgsrc;
         }
     }
 }
