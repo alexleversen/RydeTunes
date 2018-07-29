@@ -4,11 +4,14 @@
              x:Class="RydeTunes.Network.ApiTestPage">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Get RydeTunes Playlist"/>
-            <Button Text="Search for Playlist"/>
-            <Button Text="Check Playlist Empty"/>
-            <Button Text="Clear Playlist"/>
-            <Button Text="Create Playlist"/>
+            <Button Text="Get RydeTunes Playlist" Command="{Binding GetRTPlaylistCommand}"/>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Check Playlist Empty" Command="{Binding CheckPlaylistEmptyCommand}"/>
+                <Label Text="{Binding EmptyPlaylistText}" IsVisible="{Binding ShouldShowEmptyPlaylistText}"/>
+            </StackLayout>
+            <Button Text="Clear Playlist" Command="{Binding ClearPlaylistCommand}"/>
+            <Button Text="Search for Playlist" Command="{Binding SearchForPlaylistCommand}"/>
+            <Button Text="Create Playlist" Command="{Binding CreatePlaylistCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

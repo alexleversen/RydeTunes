@@ -38,7 +38,7 @@ namespace RydeTunes
 
         private void ApiOption_OnTapped(object sender, EventArgs e)
         {
-            Application.Current.MainPage.Navigation.PushAsync(new ApiTestPage());
+            Application.Current.MainPage.Navigation.PushAsync(new ApiTestPage{BindingContext = new ApiTestPageViewModel()});
         }
     }
 }
