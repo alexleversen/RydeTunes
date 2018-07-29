@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RiderPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IQRCodeScanner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IQrCodeImageGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)RiderPage.xaml">

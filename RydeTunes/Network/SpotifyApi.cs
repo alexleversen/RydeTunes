@@ -13,12 +13,17 @@ namespace RydeTunes.Network
     class SpotifyApi
     {
         public static SpotifyApi Instance;
-
-        private static string SPOTIFY_API_URL = "https://api.spotify.com/";
-        private static string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
+        private static string SPOTIFY_API_URL = "https://api.spotify.com";
+        public static readonly string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
         private string userId;
+
+        public string UserId
+        {
+            get => userId;
+            private set => userId = value;
+        }
 
         public SpotifyApi()
         {
@@ -41,7 +46,7 @@ namespace RydeTunes.Network
             userId = (await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK)).id;
            
         }
-        public async Task<bool> isTokenValid()
+        public async Task<bool> IsTokenValid()
         {
             if (string.IsNullOrEmpty(userId))
             {
