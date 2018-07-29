@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RydeTunes.Network.ApiTestPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Get RydeTunes Playlist"/>
+            <Button Text="Search for Playlist"/>
+            <Button Text="Check Playlist Empty"/>
+            <Button Text="Clear Playlist"/>
+            <Button Text="Create Playlist"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

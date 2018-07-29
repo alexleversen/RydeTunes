@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <Color x:Key="SpotifyGreen">#1DB954</Color>
             <Color x:Key="FacebookBlue">#3B5998</Color>
-            <Color x:Key="StopRed">#FE3824</Color>
+            <Color x:Key="StopRed">#FF0044</Color>
 
             <Style x:Key="BigButtonTitleStyle" TargetType="Label">
                 <Setter Property="VerticalOptions" Value="Center"/>

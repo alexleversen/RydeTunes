@@ -1,5 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
+using RydeTunes.Network;
+using RydeTunes.Network.DTO;
+using Xamarin.Forms;
 
 namespace RydeTunes
 {
@@ -7,11 +11,24 @@ namespace RydeTunes
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<string> SongList { get; private set; }
+        public ObservableCollection<Song> SongList { get; private set; }
 
-        public RiderPageViewModel()
+        public string SearchText { get; set; }
+
+        public ICommand CommitSearchCommand => new Command(CommitSearch);
+
+        private async void CommitSearch()
         {
-            SongList = new ObservableCollection<string> { "Hello", "Hi", "How are you" };
+            var songs = await SpotifyApi.Instance.SearchForSong(SearchText);
+            SongList = new ObservableCollection<Song>();
+
+            if (songs != null)
+            {
+                foreach (var song in songs)
+                {
+                    SongList.Add(song);
+                }
+            }
         }
     }
 }

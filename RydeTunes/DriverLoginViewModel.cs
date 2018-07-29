@@ -14,6 +14,7 @@ namespace RydeTunes
         {
             if (url.StartsWith("http://rydetunes.com/Success"))
             {
+                //TODO: Extract validity duration and compare to UTC time?
                 var tokenStartIndex = url.IndexOf('=');
                 var tokenEndIndex = url.IndexOf('&');
                 SpotifyApi.Instance.UpdateToken(url.Substring(tokenStartIndex + 1, tokenEndIndex - tokenStartIndex - 1));

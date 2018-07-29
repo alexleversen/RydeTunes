@@ -4,8 +4,14 @@
              x:Class="RydeTunes.RiderPage">
     <ContentPage.Content>
         <StackLayout>
-            <SearchBar VerticalOptions="Start"/>
-            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}"/>
+            <SearchBar VerticalOptions="Start" Text="{Binding SearchText}" SearchCommand="{Binding CommitSearchCommand}"/>
+            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding name}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button x:Name="qrCodeButton" VerticalOptions="End" Text="Scan QR Code..." Clicked="ScanQRCode"/>
         </StackLayout>
     </ContentPage.Content>
