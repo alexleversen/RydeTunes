@@ -33,7 +33,7 @@
       <DependentUpon>ApiTestPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Network\NetworkCallWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\ApiTestPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\DeletePlaylistTrackRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetMeResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetPlaylistsResponse.cs" />
