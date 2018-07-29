@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:RydeTunes.Converters;assembly=RydeTunes.Android"
              x:Class="RydeTunes.DriverDashboard">
+    
+    <ContentPage.Resources>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="0">
             <Label Text="##INSTRUCTIONS##" FontSize="20" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center" IsVisible="{Binding InstructionsVisible}"/>
             <Image Source="{Binding QrCodeImage}" IsVisible="{Binding QrCodeVisible}" VerticalOptions="FillAndExpand"/>
-            <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
+            <ContentView VerticalOptions="FillAndExpand" IsVisible="{Binding IsRideStarted, Converter={StaticResource InverseBooleanConverter}}" BackgroundColor="{StaticResource SpotifyGreen}">
                 <ContentView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding StartRideCommand}"/>
                 </ContentView.GestureRecognizers>
 
                 <Label Text="Start Ride" Style="{StaticResource BigButtonTitleStyle}"/>
             </ContentView>
-            <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource StopRed}">
+            <ContentView VerticalOptions="FillAndExpand" IsVisible="{Binding IsRideStarted}" BackgroundColor="{StaticResource StopRed}">
                 <ContentView.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding EndRideCommand}"/>
                 </ContentView.GestureRecognizers>

@@ -1,7 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
-using Android.OS;
-using Android.Print;
 using Xamarin.Forms;
 
 namespace RydeTunes.Network

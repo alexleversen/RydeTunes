@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Input;
 using RydeTunes.Network;
 using Xamarin.Forms;
@@ -8,18 +7,18 @@ namespace RydeTunes
 {
     public class MainViewModel
     {
+        private string _qrCodeText;
+
         public ICommand RiderTapped => new Command(ScanQRCode);
 
         public event EventHandler ReadyToNavigate;
-
-        private string _qrCodeText;
 
         async void ScanQRCode()
         {
             var scanner = DependencyService.Get<IQRCodeScanner>();
             _qrCodeText = await scanner.ScanAsync();
             var ids = _qrCodeText?.Split(':');
-            if(ids == null || !ids.Any())
+            if(ids == null || ids.Length != 3)
             {
                 return;
             }

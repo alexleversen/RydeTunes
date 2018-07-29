@@ -7,17 +7,15 @@ namespace RydeTunes
 {
     class DriverDashboardViewModel : INotifyPropertyChanged
     {
-        string _playlistIdString = "Test string.";
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ImageSource QrCodeImage { get; private set; }
 
         public bool InstructionsVisible { get; set; }
         public bool QrCodeVisible { get; set; }
+        public bool IsRideStarted { get; set; }
 
         public ICommand StartRideCommand => new Command(_ => StartRide());
-
         public ICommand EndRideCommand => new Command(_ => EndRide());
 
         public DriverDashboardViewModel()
@@ -34,11 +32,14 @@ namespace RydeTunes
             var userId = SpotifyApi.Instance.UserId;
             var authToken = SpotifyApi.Instance.Token;
             QrCodeImage = DependencyService.Get<IQrCodeImageGenerator>().GetImageSource(playlist.id+":"+userId+":"+authToken);
+            IsRideStarted = true;
         }
 
-        private void EndRide()
+        private async void EndRide()
         {
-            //TODO
+            await SpotifyApi.Instance.ClearPlaylist(SpotifyApi.Instance.ActivePlaylistId);
+            SpotifyApi.Instance.ActivePlaylistId = null;
+            IsRideStarted = false;
         }
     }
 }

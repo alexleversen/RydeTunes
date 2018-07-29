@@ -5,11 +5,11 @@ using Xamarin.Forms.Xaml;
 namespace RydeTunes
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DriverLoginPage : ContentPage
+	public partial class LoginPage : ContentPage
 	{
-	    private DriverLoginViewModel _viewModel;
+	    private LoginViewModel _viewModel;
 
-		public DriverLoginPage ()
+		public LoginPage ()
 		{
 			InitializeComponent ();
 		}
@@ -18,7 +18,7 @@ namespace RydeTunes
 	    {
 	        base.OnAppearing();
 
-            _viewModel = (DriverLoginViewModel)BindingContext;
+            _viewModel = (LoginViewModel)BindingContext;
             _viewModel.ReadyToNavigateToSuccess += ViewModel_ReadyToNavigateToSuccess;
 	    }
 
