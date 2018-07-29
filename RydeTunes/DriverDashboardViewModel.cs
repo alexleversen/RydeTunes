@@ -31,12 +31,9 @@ namespace RydeTunes
             InstructionsVisible = false;
             QrCodeVisible = true;
             var playlist = await SpotifyApi.Instance.GetRydeTunesPlaylist();
-            if(playlist == null)
-            {
-                playlist = await SpotifyApi.Instance.CreatePlaylist(SpotifyApi.RYDETUNES_PLAYLIST_NAME);
-            }
             var userId = SpotifyApi.Instance.UserId;
-            QrCodeImage = DependencyService.Get<IQrCodeImageGenerator>().GetImageSource(playlist.id+":"+userId);
+            var authToken = SpotifyApi.Instance.Token;
+            QrCodeImage = DependencyService.Get<IQrCodeImageGenerator>().GetImageSource(playlist.id+":"+userId+":"+authToken);
         }
 
         private void EndRide()

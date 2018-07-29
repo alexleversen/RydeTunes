@@ -6,13 +6,25 @@ namespace RydeTunes
 {
     public partial class MainPage : ContentPage
     {
+        private MainViewModel _viewModel;
+
         public MainPage()
         {
             InitializeComponent();
             Title = "RydeTunes";
         }
 
-        private void RiderOption_OnTapped(object sender, EventArgs e)
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if(_viewModel != null){
+                _viewModel.ReadyToNavigate -= NavigateToRiderPage;
+            }
+            _viewModel = (MainViewModel)BindingContext;
+            _viewModel.ReadyToNavigate += NavigateToRiderPage;
+        }
+
+        private void NavigateToRiderPage(object sender, EventArgs e)
         {
             var page = new RiderPage
             {

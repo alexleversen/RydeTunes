@@ -12,7 +12,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="qrCodeButton" VerticalOptions="End" Text="Scan QR Code..." Clicked="ScanQRCode"/>
+            <Image Source="{Binding QrCodeImage}" IsVisible="{Binding QrCodeVisible}" VerticalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

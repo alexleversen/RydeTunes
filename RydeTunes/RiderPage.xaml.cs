@@ -19,11 +19,5 @@ namespace RydeTunes
 		{
 			InitializeComponent ();
 		}
-
-        async void ScanQRCode(object sender, System.EventArgs e) {
-            var scanner = DependencyService.Get<IQRCodeScanner>();
-            _qrCodeText = await scanner.ScanAsync();
-            qrCodeButton.Text = _qrCodeText;
-        }
 	}
 }

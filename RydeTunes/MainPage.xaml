@@ -10,7 +10,7 @@
         <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
             <Label Text="Rider" Style="{StaticResource BigButtonTitleStyle}">
                 <Label.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
+                    <TapGestureRecognizer Command="{Binding RiderTapped}"/>
                 </Label.GestureRecognizers>
             </Label>
         </ContentView>

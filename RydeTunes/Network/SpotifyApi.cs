@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
 using RydeTunes.Network.DTO;
 using System.Net;
 
@@ -13,16 +12,20 @@ namespace RydeTunes.Network
     class SpotifyApi
     {
         public static SpotifyApi Instance;
-        private static string SPOTIFY_API_URL = "https://api.spotify.com";
-        public static readonly string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
+        private static string SPOTIFY_API_URL = "https://api.spotify.com/";
+        private static string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
-        private string userId;
 
-        public string UserId
-        {
-            get => userId;
-            private set => userId = value;
+        public string UserId{ get; set; }
+
+        public string ActivePlaylistId { get; set; }
+
+        public string Token { 
+            get => spotifyClient.DefaultRequestHeaders.Authorization.Parameter;
+            set {
+                UpdateToken(value).Wait();
+            }
         }
 
         public SpotifyApi()
@@ -43,12 +46,12 @@ namespace RydeTunes.Network
             spotifyClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me");
-            userId = (await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK)).id;
+            UserId = (await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK)).id;
            
         }
         public async Task<bool> IsTokenValid()
         {
-            if (string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(UserId))
             {
                 return false;
             }
@@ -123,7 +126,7 @@ namespace RydeTunes.Network
             return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.OK);
         }
         public async Task<List<PlaylistTrack>> GetPlaylistTracks( string playlistId) {
-              HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
+              HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ UserId + "/playlists/" + playlistId + "/tracks");
               return (await NetworkCallWrapper.ParseResponse<PlaylistTrackResponse>(response, HttpStatusCode.OK)).items;
         }
         public async Task ClearPlaylistTracks(List<string> trackIds, string playlistId) {
@@ -146,7 +149,7 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Delete,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + userId + "/playlists/" + playlistId + "/tracks"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + UserId + "/playlists/" + playlistId + "/tracks"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
 
@@ -161,7 +164,7 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Post,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + userId + "/playlists"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + UserId + "/playlists"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
             return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.Created);
