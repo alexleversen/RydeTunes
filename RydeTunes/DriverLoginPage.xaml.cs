@@ -29,10 +29,6 @@ namespace RydeTunes
 	        {
 	            LoginWebView.GoBack();
 	        }
-	        else
-	        { // If not, leave the view
-	            Navigation.PopAsync();
-	        }
         }
 
 	    private void ForwardButton_OnTapped(object sender, EventArgs e)
@@ -50,9 +46,9 @@ namespace RydeTunes
 
 	    private void ViewModel_ReadyToNavigateToSuccess(object sender, EventArgs e)
 	    {
-	        var page = new DriverDashboard
+	        var page = new MainPage
 	        {
-	            BindingContext = new DriverDashboardViewModel()
+	            BindingContext = new MainViewModel()
 	        };
 	        Application.Current.MainPage.Navigation.PushAsync(page);
             Application.Current.MainPage.Navigation.RemovePage(this);

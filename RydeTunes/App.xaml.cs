@@ -16,7 +16,7 @@ namespace RydeTunes
 
             SpotifyApi.Instance = new SpotifyApi();
 
-            MainPage = new NavigationPage(new MainPage {BindingContext = new MainViewModel()});
+            MainPage = new NavigationPage(new DriverLoginPage {BindingContext = new DriverLoginViewModel()});
         }
 
         protected override void OnStart()

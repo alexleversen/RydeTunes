@@ -23,9 +23,9 @@ namespace RydeTunes
 
         private void DriverOption_OnTapped(object sender, EventArgs e)
         {
-            var page = new DriverLoginPage
+            var page = new DriverDashboard
             {
-                BindingContext = new DriverLoginViewModel()
+                BindingContext = new DriverDashboardViewModel()
             };
             NavigateAndSetAsRoot(page);
         }

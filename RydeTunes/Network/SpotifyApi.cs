@@ -148,7 +148,8 @@ namespace RydeTunes.Network
             try
             {
                 HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
-                results = Newtonsoft.Json.JsonConvert.DeserializeObject<Tracks>(await response.Content.ReadAsStringAsync()).items;
+                var responseString = await response.Content.ReadAsStringAsync();
+                results = Newtonsoft.Json.JsonConvert.DeserializeObject<Tracks>(responseString).items;
 
 
                 results.Sort(delegate (Song x, Song y)
