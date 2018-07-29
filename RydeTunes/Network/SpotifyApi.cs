@@ -4,7 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 using RydeTunes.Network.DTO;
+using System.Net;
 
 namespace RydeTunes.Network
 {
@@ -36,7 +38,7 @@ namespace RydeTunes.Network
             spotifyClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
 
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me");
-            userId = Newtonsoft.Json.JsonConvert.DeserializeObject<GetMeResponse>(await response.Content.ReadAsStringAsync()).id;
+            userId = (await NetworkCallWrapper.ParseResponse<GetMeResponse>(response, HttpStatusCode.OK)).id;
            
         }
         
@@ -91,15 +93,15 @@ namespace RydeTunes.Network
 
         public async Task<List<Playlist>> GetMyPlaylists() {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
+            return (await NetworkCallWrapper.ParseResponse<GetPlaylistsResponse>(response, HttpStatusCode.OK)).items;
         }
         public async Task<Playlist> GetPlaylist( string playlistId) {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
+            return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.OK);
         }
         public async Task<List<PlaylistTrack>> GetPlaylistTracks( string playlistId) {
               HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
-              return Newtonsoft.Json.JsonConvert.DeserializeObject<PlaylistTrackResponse>(await response.Content.ReadAsStringAsync()).items;
+              return (await NetworkCallWrapper.ParseResponse<PlaylistTrackResponse>(response, HttpStatusCode.OK)).items;
         }
         public async Task ClearPlaylistTracks(List<string> trackIds, string playlistId) {
             List<TrackToDelete> tracksToDelete = new List<TrackToDelete>();
@@ -136,7 +138,7 @@ namespace RydeTunes.Network
                 RequestUri = new Uri("v1/users/" + userId + "/playlist"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
-            return new Playlist();
+            return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.OK);
         }
 
         /* Passenger methods */
@@ -148,8 +150,7 @@ namespace RydeTunes.Network
             try
             {
                 HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
-                var responseString = await response.Content.ReadAsStringAsync();
-                results = Newtonsoft.Json.JsonConvert.DeserializeObject<Tracks>(responseString).items;
+                results = (await NetworkCallWrapper.ParseResponse<Tracks>(response, HttpStatusCode.OK)).items;
 
 
                 results.Sort(delegate (Song x, Song y)
