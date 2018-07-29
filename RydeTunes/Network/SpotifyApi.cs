@@ -142,7 +142,7 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Delete,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri("v1/users/" + userId + "/playlists/" + playlistId + "/tracks"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + userId + "/playlists/" + playlistId + "/tracks"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
 
@@ -157,10 +157,10 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Post,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri("v1/users/" + userId + "/playlist"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + userId + "/playlists"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
-            return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.OK);
+            return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.Created);
         }
 
         /* Passenger methods */
@@ -201,7 +201,7 @@ namespace RydeTunes.Network
             var request = new HttpRequestMessage()
             {
                 Method = HttpMethod.Post,
-                RequestUri = new Uri("v1/users/" + ownerUserId + "/playlists/" + playlistId + "/tracks" + arguments),
+                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + ownerUserId + "/playlists/" + playlistId + "/tracks" + arguments),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
         }
