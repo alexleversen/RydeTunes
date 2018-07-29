@@ -26,6 +26,12 @@ namespace RydeTunes
             QrCodeImage = DependencyService.Get<IQrCodeImageGenerator>().GetImageSource(playlistId + ":" + userId + ":" + authToken);
         }
 
+        public async void AddSong(Song song)
+        {
+            await SpotifyApi.Instance.AddSongToPlaylist(song.id, SpotifyApi.Instance.UserId,
+                SpotifyApi.Instance.ActivePlaylistId);
+        }
+
         private async void CommitSearch()
         {
             var songs = await SpotifyApi.Instance.SearchForSong(SearchText);

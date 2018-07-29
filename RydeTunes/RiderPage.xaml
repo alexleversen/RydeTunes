@@ -5,11 +5,11 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar VerticalOptions="Start" Text="{Binding SearchText}" SearchCommand="{Binding CommitSearchCommand}"/>
-            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}">
+            <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}" ItemSelected="ListView_OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding name}"/>
+                            <Label Text="{Binding name}" Margin="16, 0, 0, 0"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
