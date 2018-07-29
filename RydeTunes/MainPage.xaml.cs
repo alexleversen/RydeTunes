@@ -1,4 +1,5 @@
 ﻿using System;
+using RydeTunes.Network;
 using Xamarin.Forms;
 
 namespace RydeTunes
@@ -33,6 +34,11 @@ namespace RydeTunes
         {
             Application.Current.MainPage.Navigation.PushAsync(page);
             Application.Current.MainPage.Navigation.RemovePage(this);
+        }
+
+        private void ApiOption_OnTapped(object sender, EventArgs e)
+        {
+            Application.Current.MainPage.Navigation.PushAsync(new ApiTestPage());
         }
     }
 }
