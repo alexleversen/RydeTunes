@@ -14,7 +14,7 @@ namespace RydeTunes.Network
     {
         public static SpotifyApi Instance;
 
-        private static string SPOTIFY_API_URL = "https://api.spotify.com";
+        private static string SPOTIFY_API_URL = "https://api.spotify.com/";
         private static string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
