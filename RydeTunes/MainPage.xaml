@@ -4,27 +4,18 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              ios:Page.UseSafeArea="true" 
              x:Class="RydeTunes.MainPage">
-    <ContentPage.Resources>
-        <Style x:Key="ButtonLabelStyle" TargetType="Label">
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="30"/>
-        </Style>
-    </ContentPage.Resources>
 
     <StackLayout Spacing="0">
         <Label Text="Who are you?" FontSize="30" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" FontAttributes="Bold"/>
         <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
-            <Label Text="Rider" Style="{StaticResource ButtonLabelStyle}">
+            <Label Text="Rider" Style="{StaticResource BigButtonTitleStyle}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="RiderOption_OnTapped"/>
                 </Label.GestureRecognizers>
             </Label>
         </ContentView>
         <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource FacebookBlue}">
-            <Label Text="Driver" Style="{StaticResource ButtonLabelStyle}">
+            <Label Text="Driver" Style="{StaticResource BigButtonTitleStyle}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="DriverOption_OnTapped"/>
                 </Label.GestureRecognizers>

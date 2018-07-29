@@ -6,6 +6,15 @@
         <ResourceDictionary>
             <Color x:Key="SpotifyGreen">#1DB954</Color>
             <Color x:Key="FacebookBlue">#3B5998</Color>
+            <Color x:Key="StopRed">#FE3824</Color>
+
+            <Style x:Key="BigButtonTitleStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
