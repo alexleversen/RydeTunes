@@ -13,15 +13,10 @@ namespace RydeTunes.Network
         public static SpotifyApi Instance;
 
         private static string SPOTIFY_API_URL = "https://api.spotify.com";
-        private static string RYDETUNES_PLAYLIST_NAME = "Ryde Tunes Collaborative Playlist";
+        private static string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
 
-
-        public SpotifyApi()
-        {
-            Instance = this;
-        }
         public void UpdateToken(string authToken)
         {
             if (string.IsNullOrEmpty(authToken))
@@ -57,16 +52,16 @@ namespace RydeTunes.Network
         // Searches for playlists of the current user with the given name
         // Returns null if playlist was not found
         public async Task<Playlist> SearchForPlaylist(string playlistName)
-        {
+        //{
             foreach (Playlist p in await GetPlaylists())
-            {
-                if (p.name.Contains(playlistName)) {
-                  return p;
-                }
-            }
-            return null;
+        //    {
+        //        if (p.name.Contains(playlistName)) {
+        //          return p;
+        //        }
+        //    }
+        //    return null;
 
-        }
+        //}
 
         public bool PlaylistIsEmpty(string userId, string playlistId)
         {
@@ -81,7 +76,7 @@ namespace RydeTunes.Network
         public async Task<List<Playlist>> GetPlayists() {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
-        }
+        //public async Playlist GetPlaylist(string playlistId) {
         public async Task<Playlist> GetPlaylist(string userId, string playlistId) {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
@@ -94,7 +89,7 @@ namespace RydeTunes.Network
             //TODO implement
 
             var request = Newtonsoft.Json.JsonConvert.SerializeObject()
-            
+
             HttpResponseMessage response = await spotifyClient.DeleteAsync("v1/users/" + userId + "/playlists/" + playlistId + "/tracks");
 
         }

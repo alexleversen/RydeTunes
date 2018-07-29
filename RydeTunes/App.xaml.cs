@@ -41,24 +41,23 @@ namespace RydeTunes
             {
                 AutoReset = true
             };
-            timer.Elapsed += (_,__) => PingSpotify(timer);
+            //timer.Elapsed += (_,__) => PingSpotify(timer);
             timer.Start();
-
 
             //TODO: Loop every minute(?) and ping the playlist to check if it's empty
             //When playlist is empty and we care (a song has been added this session), raise SessionInvalidated (SessionInvalidated?.Invoke(this, EventArgs.Empty);
         }
 
-        private void PingSpotify(Timer timer)
-        {
+        //private void PingSpotify(Timer timer)
+        //{
             if(SpotifyApi.Instance.PlaylistIsEmpty("") && _rideStarted){
-                timer.Stop();
+        //        timer.Stop();
                 //SpotifyApi.Instance.DisconnectFromPlaylist();
-                return;
-            }
-            else if (!_rideStarted) {
-                _rideStarted = true;
-            }
-        }
+        //        return;
+        //    }
+        //    else if (!_rideStarted) {
+        //        _rideStarted = true;
+        //    }
+        //}
     }
 }
