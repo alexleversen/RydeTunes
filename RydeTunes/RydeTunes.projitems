@@ -31,7 +31,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\DeletePlaylistTrackRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetPlaylistsResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\MakePlaylistRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\CreatePlaylistRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\PlaylistTrackResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\SearchForTrackResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\TrackListResponse.cs" />

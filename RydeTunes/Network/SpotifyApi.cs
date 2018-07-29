@@ -17,6 +17,11 @@ namespace RydeTunes.Network
 
         private HttpClient spotifyClient;
 
+        public SpotifyApi()
+        {
+            Instance = this;
+        }
+
         public void UpdateToken(string authToken)
         {
             if (string.IsNullOrEmpty(authToken))
@@ -29,8 +34,7 @@ namespace RydeTunes.Network
             spotifyClient.DefaultRequestHeaders.Accept.Clear();
             spotifyClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
         }
-
-        public event EventHandler SessionInvalidated;
+        
 
         /* Driver methods */
 
@@ -113,8 +117,18 @@ namespace RydeTunes.Network
 
         }
         public async Task<Playlist> CreatePlaylist(string playlistName, string userId) {
-            // TODO implement
-            //HttpResponseMessage response = await spotifyClient.PostAsync("v1/users/" + userId + "/playlists", content);
+            var createPlaylistRequest = new CreatePlaylistRequest(){
+                name = playlistName,
+                @public = true,
+            };   
+            var requestBody = Newtonsoft.Json.JsonConvert.SerializeObject(createPlaylistRequest);
+            var request = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                Content = new StringContent(requestBody, Encoding.UTF8),
+                RequestUri = new Uri("v1/users/" + userId + "/playlist"),
+            };
+            HttpResponseMessage response = await spotifyClient.SendAsync(request);
             return new Playlist();
         }
 
