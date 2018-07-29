@@ -68,4 +68,9 @@ namespace RydeTunes.Network.DTO
         public object previous { get; set; }
         public int total { get; set; }
     }
+
+    public class SearchForTrackResponse
+    {
+        public Tracks tracks { get; set; }
+    }
 }

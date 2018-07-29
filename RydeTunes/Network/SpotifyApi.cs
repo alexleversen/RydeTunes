@@ -174,8 +174,9 @@ namespace RydeTunes.Network
 
         public async Task<List<Song>> GetSongs(string searchTerms)
         {
-            HttpResponseMessage response = await spotifyClient.GetAsync("v1/search" + "?q=name:" + searchTerms + "&type=artist");
-            return (await NetworkCallWrapper.ParseResponse<Tracks>(response, HttpStatusCode.OK)).items;
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/search" + "?q=" + searchTerms + "&type=track");
+            var body = await response.Content.ReadAsStringAsync();
+            return (await NetworkCallWrapper.ParseResponse<SearchForTrackResponse>(response, HttpStatusCode.OK)).tracks.items;
         }
 
         public async Task<List<Song>> SearchForSong(string searchTerms)
