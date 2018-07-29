@@ -8,7 +8,9 @@
             <ListView VerticalOptions="StartAndExpand" ItemsSource="{Binding SongList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding name}"/>
+                        <ViewCell>
+                            <Label Text="{Binding name}"/>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
