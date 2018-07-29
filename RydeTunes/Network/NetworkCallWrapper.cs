@@ -13,7 +13,7 @@ namespace RydeTunes.Network
         {
             if (expectedStatusCode != message.StatusCode)
             {
-                throw new Exception("Expected status code was not correct, instead found " + message.StatusCode + " " + await message.Content.ReadAsStringAsync());
+                throw new Exception("Expected status code was not correct, instead found " + message.StatusCode + ":\n" + await message.Content.ReadAsStringAsync() + "\n" + message.RequestMessage.RequestUri);
             } else
             {
                 return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(await message.Content.ReadAsStringAsync());

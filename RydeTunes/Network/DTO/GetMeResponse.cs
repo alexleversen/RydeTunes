@@ -19,11 +19,4 @@ namespace RydeTunes.Network.DTO
         public string type { get; set; }
         public string uri { get; set; }
     }
-    
-    public class Followers
-    {
-        public object href { get; set; }
-        public int total { get; set; }
-    }
-    
 }

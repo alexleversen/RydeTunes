@@ -143,22 +143,26 @@ namespace RydeTunes.Network
 
         /* Passenger methods */
 
+        public async Task<List<Song>> GetSongs(string searchTerms)
+        {
+            HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
+            return (await NetworkCallWrapper.ParseResponse<Tracks>(response, HttpStatusCode.OK)).items;
+        }
+
         public async Task<List<Song>> SearchForSong(string searchTerms)
         {
             List<Song> results = null;
-            
+
             try
             {
-                HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
-                results = (await NetworkCallWrapper.ParseResponse<Tracks>(response, HttpStatusCode.OK)).items;
-
+                results = await GetSongs(searchTerms);
 
                 results.Sort(delegate (Song x, Song y)
                 {
                     return x.popularity.CompareTo(y.popularity);
                 });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //deal with issue
                 System.Diagnostics.Debug.WriteLine("Api call failed: {0}", e.Message);
