@@ -21,7 +21,7 @@
                 </Label.GestureRecognizers>
             </Label>
         </ContentView>
-        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="White">
+        <ContentView VerticalOptions="FillAndExpand" BackgroundColor="White" IsVisible="False">
             <Label Text="Test API" TextColor="Black" Style="{StaticResource BigButtonTitleStyle}">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="ApiOption_OnTapped"/>
