@@ -171,7 +171,7 @@ namespace RydeTunes.Network
 
         public async Task<List<Song>> GetSongs(string searchTerms)
         {
-            HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/search" + "?q=name:" + searchTerms + "&type=artist");
             return (await NetworkCallWrapper.ParseResponse<Tracks>(response, HttpStatusCode.OK)).items;
         }
 
