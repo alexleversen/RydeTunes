@@ -21,11 +21,10 @@ namespace RydeTunes.Network
 
         public string ActivePlaylistId { get; set; }
 
-        public string Token { 
+        public string Token
+        { 
             get => spotifyClient.DefaultRequestHeaders.Authorization.Parameter;
-            set {
-                UpdateToken(value).Wait();
-            }
+            set => UpdateToken(value).Wait();
         }
 
         public SpotifyApi()

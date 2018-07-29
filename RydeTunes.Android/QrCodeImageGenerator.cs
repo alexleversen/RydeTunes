@@ -2,6 +2,7 @@
 using Android.Graphics;
 using RydeTunes.Droid;
 using Xamarin.Forms;
+using ZXing.Common;
 using ZXing.Mobile;
 
 [assembly: Dependency(typeof(QrCodeImageGenerator))]
@@ -13,7 +14,8 @@ namespace RydeTunes.Droid
         {
             var writer = new BarcodeWriter
             {
-                Format = ZXing.BarcodeFormat.QR_CODE
+                Format = ZXing.BarcodeFormat.QR_CODE,
+                Options = new EncodingOptions { Height = 1000, Width = 1000 }
             };
             var image = writer.Write(text);
 
