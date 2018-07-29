@@ -12,7 +12,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Image Source="{Binding QrCodeImage}" IsVisible="{Binding QrCodeVisible}" VerticalOptions="FillAndExpand"/>
+            <Image Source="{Binding QrCodeImage}" VerticalOptions="FillAndExpand"/>
+            <Label Text="Use this code to share with your other Ryders!" HorizontalOptions="Center" Margin="16"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

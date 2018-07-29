@@ -14,8 +14,17 @@ namespace RydeTunes
         public ObservableCollection<Song> SongList { get; private set; }
 
         public string SearchText { get; set; }
+        public ImageSource QrCodeImage { get; }
 
         public ICommand CommitSearchCommand => new Command(CommitSearch);
+
+        public RiderPageViewModel()
+        {
+            var playlistId = SpotifyApi.Instance.ActivePlaylistId;
+            var userId = SpotifyApi.Instance.UserId;
+            var authToken = SpotifyApi.Instance.Token;
+            QrCodeImage = DependencyService.Get<IQrCodeImageGenerator>().GetImageSource(playlistId + ":" + userId + ":" + authToken);
+        }
 
         private async void CommitSearch()
         {
