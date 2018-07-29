@@ -82,10 +82,11 @@ namespace RydeTunes.Network
 
         /* Passenger methods */
 
-        public List<String> SearchForSong(string searchTerms)
+        public async Task<List<Songs>> SearchForSong(string searchTerms)
         {
-            // TODO
-            return new List<string>();
+            
+            HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Tracks>(await response.Content.ReadAsStringAsync()).items;
         }
 
 

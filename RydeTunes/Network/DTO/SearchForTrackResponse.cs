@@ -37,7 +37,7 @@ namespace RydeTunes.Network.DTO
     }
 
 
-    public class Item
+    public class Songs
     {
         public Album album { get; set; }
         public List<Artist> artists { get; set; }
@@ -61,7 +61,7 @@ namespace RydeTunes.Network.DTO
     public class Tracks
     {
         public string href { get; set; }
-        public List<Item> items { get; set; }
+        public List<Songs> items { get; set; }
         public int limit { get; set; }
         public string next { get; set; }
         public int offset { get; set; }
