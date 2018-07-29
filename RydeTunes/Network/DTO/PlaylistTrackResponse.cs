@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace RydeTunes.Network.DTO
 {
@@ -31,7 +33,7 @@ namespace RydeTunes.Network.DTO
       public AddedBy added_by { get; set; }
       public bool is_local { get; set; }
       public object primary_color { get; set; }
-      public Track track { get; set; }
+      public Song track { get; set; }
       public VideoThumbnail video_thumbnail { get; set; }
   }
 }

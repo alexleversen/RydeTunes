@@ -29,12 +29,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\ExternalUrls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\DeletePlaylistTrackRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetPlaylistsResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\Image.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\Owner.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\Playlist.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\MakePlaylistRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\PlaylistTrackResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\SearchForTrackResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\TrackListResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\NetworkInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\SpotifyApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainViewModel.cs" />
