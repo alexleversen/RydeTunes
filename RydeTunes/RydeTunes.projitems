@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetMeResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\DeletePlaylistTrackRequest.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetPlaylistsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\CreatePlaylistRequest.cs" />

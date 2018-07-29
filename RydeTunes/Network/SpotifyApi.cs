@@ -16,13 +16,14 @@ namespace RydeTunes.Network
         private static string RYDETUNES_PLAYLIST_NAME = "RydeTunes Collaborative Playlist";
 
         private HttpClient spotifyClient;
+        private string userId;
 
         public SpotifyApi()
         {
             Instance = this;
         }
 
-        public void UpdateToken(string authToken)
+        public async Task UpdateToken(string authToken)
         {
             if (string.IsNullOrEmpty(authToken))
             {
@@ -33,68 +34,74 @@ namespace RydeTunes.Network
             spotifyClient.BaseAddress = new Uri(SPOTIFY_API_URL);
             spotifyClient.DefaultRequestHeaders.Accept.Clear();
             spotifyClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", authToken);
+
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/me");
+            userId = Newtonsoft.Json.JsonConvert.DeserializeObject<GetMeResponse>(await response.Content.ReadAsStringAsync()).id;
+           
         }
         
 
         /* Driver methods */
-
-        public async Task<Playlist> GetRydeTunesPlaylist(string userId)
+        // Gets the playlist if it exists on the provided users account
+        // Otherwise, create the playlist 
+        public async Task<Playlist> GetRydeTunesPlaylist()
         {
             // Get playlist if it exists
-            Playlist p = await SearchForPlaylist(RYDETUNES_PLAYLIST_NAME);
-            if (p == null) {
-                return await CreatePlaylist(RYDETUNES_PLAYLIST_NAME, userId);
-            } else {
-              // Clear playlist
-              await ClearPlaylist(userId, p.id);
-              // Return id
-              return p;
+            Playlist p = await SearchForMyPlaylist(RYDETUNES_PLAYLIST_NAME);
+            if (p == null)
+            {
+                return await CreatePlaylist(RYDETUNES_PLAYLIST_NAME);
             }
-
+            else
+            {
+                await ClearPlaylist(p.id);
+                return p;
+            }
         }
-        // Searches for playlists of the current user with the given name
+
+        // Searches for playlists of the current user (determined by token) with the given name
         // Returns null if playlist was not found
-        public async Task<Playlist> SearchForPlaylist(string playlistName)
+        public async Task<Playlist> SearchForMyPlaylist(string playlistName)
         {
-            foreach (Playlist p in await GetPlaylists())
+            foreach (Playlist p in await GetMyPlaylists())
             {
                 if (p.name.Contains(playlistName)) {
                   return p;
                 }
             }
             return null;
-
         }
 
-        public async Task<bool> PlaylistIsEmpty(string userId, string playlistId)
+        public async Task<bool> PlaylistIsEmpty(string playlistId)
         {
-            return (await GetPlaylistTracks(userId, playlistId)).Count > 0;
+            return (await GetPlaylistTracks(playlistId)).Count <= 0;
         }
 
-        public async Task ClearPlaylist(string userId, string playlistId)
+        // Remove every song in the playlist
+        public async Task ClearPlaylist(string playlistId)
         {
             List<string> songsToKill = new List<string>();
-            List<PlaylistTrack> tracks = await GetPlaylistTracks(userId, playlistId);
+            List<PlaylistTrack> tracks = await GetPlaylistTracks(playlistId);
             foreach (PlaylistTrack track in tracks)
             {
                 songsToKill.Add(track.track.name);
             }
-            await ClearPlaylistTracks(songsToKill, userId, playlistId);
+            await ClearPlaylistTracks(songsToKill, playlistId);
         }
 
-        public async Task<List<Playlist>> GetPlaylists() {
+        public async Task<List<Playlist>> GetMyPlaylists() {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlaylistsResponse>(await response.Content.ReadAsStringAsync()).items;
         }
-        public async Task<Playlist> GetPlaylist(string userId, string playlistId) {
+        public async Task<Playlist> GetPlaylist( string playlistId) {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Playlist>(await response.Content.ReadAsStringAsync());
         }
-        public async Task<List<PlaylistTrack>> GetPlaylistTracks(string userId, string playlistId) {
+        public async Task<List<PlaylistTrack>> GetPlaylistTracks( string playlistId) {
               HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId + "/tracks");
               return Newtonsoft.Json.JsonConvert.DeserializeObject<PlaylistTrackResponse>(await response.Content.ReadAsStringAsync()).items;
         }
-        public async Task ClearPlaylistTracks(List<string> trackIds, string userId, string playlistId) {
+        public async Task ClearPlaylistTracks(List<string> trackIds, string playlistId) {
             List<TrackToDelete> tracksToDelete = new List<TrackToDelete>();
             foreach (string s in trackIds)
             {
@@ -116,7 +123,7 @@ namespace RydeTunes.Network
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
 
         }
-        public async Task<Playlist> CreatePlaylist(string playlistName, string userId) {
+        public async Task<Playlist> CreatePlaylist(string playlistName) {
             var createPlaylistRequest = new CreatePlaylistRequest(){
                 name = playlistName,
                 @public = true,
@@ -138,6 +145,17 @@ namespace RydeTunes.Network
         {
             HttpResponseMessage response = await spotifyClient.GetAsync(searchTerms.Replace(" ", "%20"));
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Tracks>(await response.Content.ReadAsStringAsync()).items;
+        }   
+
+        public async Task AddSongToPlaylist(string songId, string playlistId)
+        {
+            var arguments = "?uris=spotify:track:" + songId;
+            var request = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri("v1/users/" + userId + "/playlists/" + playlistId + "/tracks" + arguments),
+            };
+            HttpResponseMessage response = await spotifyClient.SendAsync(request);
         }
     }
 }
