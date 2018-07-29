@@ -4,12 +4,19 @@
              x:Class="RydeTunes.DriverDashboard">
     <ContentPage.Content>
         <StackLayout Spacing="0">
-            <Label Text="Show Barcode" VerticalOptions="CenterAndExpand" TextColor="Black" 
-                   Style="{StaticResource BigButtonTitleStyle}"/>
+            <Label Text="##INSTRUCTIONS##" FontSize="20" VerticalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
             <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource SpotifyGreen}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="StartRide_OnTapped"/>
+                </ContentView.GestureRecognizers>
+
                 <Label Text="Start Ride" Style="{StaticResource BigButtonTitleStyle}"/>
             </ContentView>
             <ContentView VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource StopRed}">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="StartRide_OnTapped"/>
+                </ContentView.GestureRecognizers>
+
                 <Label Text="End Ride" Style="{StaticResource BigButtonTitleStyle}"/>
             </ContentView>
         </StackLayout>

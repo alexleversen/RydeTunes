@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,5 +11,15 @@ namespace RydeTunes
 		{
 			InitializeComponent ();
 		}
+
+	    private void StartRide_OnTapped(object sender, EventArgs e)
+	    {
+	        
+	    }
+
+	    private void EndRide_OnTapped(object sender, EventArgs e)
+	    {
+	        
+	    }
 	}
 }
