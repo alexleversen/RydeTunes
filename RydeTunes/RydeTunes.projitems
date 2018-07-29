@@ -41,7 +41,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\PlaylistTrackResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\SearchForTrackResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\TrackListResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Network\NetworkInterface.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\NetworkCallWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\SpotifyApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RiderPage.xaml.cs">
