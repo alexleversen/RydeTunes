@@ -12,6 +12,7 @@
             <Button Text="Clear Playlist" Command="{Binding ClearPlaylistCommand}"/>
             <Button Text="Search for Playlist" Command="{Binding SearchForPlaylistCommand}"/>
             <Button Text="Create Playlist" Command="{Binding CreatePlaylistCommand}"/>
+            <Button Text="Add hard coded song" Command="{Binding AddSongcommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

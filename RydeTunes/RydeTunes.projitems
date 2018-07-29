@@ -35,6 +35,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Network\ApiTestPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\DeletePlaylistTrackRequest.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\AddSongResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetMeResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\GetPlaylistsResponse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Network\DTO\CreatePlaylistRequest.cs" />

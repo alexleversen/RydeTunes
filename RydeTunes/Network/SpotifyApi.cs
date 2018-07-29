@@ -108,17 +108,18 @@ namespace RydeTunes.Network
             List<PlaylistTrack> tracks = await GetPlaylistTracks(playlistId);
             foreach (PlaylistTrack track in tracks)
             {
-                songsToKill.Add(track.track.name);
+                songsToKill.Add(track.track.id);
             }
-            await ClearPlaylistTracks(songsToKill, playlistId);
+            if (songsToKill.Count > 0)
+                await ClearPlaylistTracks(songsToKill, playlistId);
         }
 
         public async Task<List<Playlist>> GetMyPlaylists() {
             HttpResponseMessage response = await spotifyClient.GetAsync("v1/me/playlists");
             return (await NetworkCallWrapper.ParseResponse<GetPlaylistsResponse>(response, HttpStatusCode.OK)).items;
         }
-        public async Task<Playlist> GetPlaylist( string playlistId) {
-            HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ userId + "/playlists/" + playlistId);
+        public async Task<Playlist> GetPlaylist(string ownerUserId, string playlistId) {
+            HttpResponseMessage response = await spotifyClient.GetAsync("v1/users/"+ ownerUserId + "/playlists/" + playlistId);
             return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.OK);
         }
         public async Task<List<PlaylistTrack>> GetPlaylistTracks( string playlistId) {
@@ -127,12 +128,15 @@ namespace RydeTunes.Network
         }
         public async Task ClearPlaylistTracks(List<string> trackIds, string playlistId) {
             List<TrackToDelete> tracksToDelete = new List<TrackToDelete>();
+            int index = 0;
             foreach (string s in trackIds)
             {
                 tracksToDelete.Add(new TrackToDelete()
                 {
                     uri = "spotify:track:" + s,
+                    positions = new List<int>() { index }
                 });
+                index++;
             }
             DeletePlaylistTrackRequest trackRequest = new DeletePlaylistTrackRequest(){
                 tracks = tracksToDelete
@@ -142,7 +146,7 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Delete,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + userId + "/playlists/" + playlistId + "/tracks"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + userId + "/playlists/" + playlistId + "/tracks"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
 
@@ -157,7 +161,7 @@ namespace RydeTunes.Network
             {
                 Method = HttpMethod.Post,
                 Content = new StringContent(requestBody, Encoding.UTF8),
-                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + userId + "/playlists"),
+                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + userId + "/playlists"),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
             return await NetworkCallWrapper.ParseResponse<Playlist>(response, HttpStatusCode.Created);
@@ -192,18 +196,18 @@ namespace RydeTunes.Network
 
             return results;
         }
-        
-
-
-        public async Task AddSongToPlaylist(string songId, string ownerUserId, string playlistId)
+       
+        public async Task<AddSongResponse> AddSongToPlaylist(string songId, string ownerUserId, string playlistId)
         {
             var arguments = "?uris=spotify:track:" + songId;
             var request = new HttpRequestMessage()
             {
                 Method = HttpMethod.Post,
-                RequestUri = new Uri(spotifyClient.BaseAddress.OriginalString + "v1/users/" + ownerUserId + "/playlists/" + playlistId + "/tracks" + arguments),
+                RequestUri = new Uri(spotifyClient.BaseAddress.AbsoluteUri + "v1/users/" + ownerUserId + "/playlists/" + playlistId + "/tracks" + arguments),
             };
             HttpResponseMessage response = await spotifyClient.SendAsync(request);
+            return await NetworkCallWrapper.ParseResponse<AddSongResponse>(response, HttpStatusCode.Created);
         }
+        
     }
 }

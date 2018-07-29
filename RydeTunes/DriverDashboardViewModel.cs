@@ -30,7 +30,7 @@ namespace RydeTunes
         {
             InstructionsVisible = false;
             QrCodeVisible = true;
-            var playlist = await SpotifyApi.Instance.GetPlaylist(SpotifyApi.RYDETUNES_PLAYLIST_NAME);
+            var playlist = await SpotifyApi.Instance.GetRydeTunesPlaylist();
             if(playlist == null)
             {
                 playlist = await SpotifyApi.Instance.CreatePlaylist(SpotifyApi.RYDETUNES_PLAYLIST_NAME);
