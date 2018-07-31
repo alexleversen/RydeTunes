@@ -189,6 +189,8 @@ namespace RydeTunes.Network
                 {
                     return x.popularity.CompareTo(y.popularity);
                 });
+
+                results.Reverse();
             }
             catch (Exception e)
             {
